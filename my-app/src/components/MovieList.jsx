@@ -39,13 +39,24 @@ function MovieList() {
   return (
     <div>
       <h1>Librairie de films</h1>
-      <input
-        type="text"
-        placeholder="Cherche un film..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={searchMovies}>Rechercher</button>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Cherche un film..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              searchMovies();
+            }
+          }}
+          className="search-input"
+        />
+
+        <button onClick={searchMovies} className="search-btn">
+          Rechercher
+        </button>
+      </div>
 
       <div className="movie-list" style={{ marginTop: "1rem" }}>
         {!searched && !loading && !error && movies.length === 0 && (
